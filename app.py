@@ -97,7 +97,77 @@ with st.sidebar:
     min_liq_distance = st.number_input('Minimum Liquidation Distance (%)', value=30)
     
     # AAVE parameters
-    st.markdown('<h6>AAVE Parameters</h6>', unsafe_allow_html=True)
+    st.markdown('# Streamlit UI
+st.title('Funding Arbitrage Calculator')
+st.markdown('<h4>Optimize your funding strategies and visualize results with enhanced clarity.</h4>', unsafe_allow_html=True)
+
+# Input parameters
+with st.sidebar:
+    st.header('Input Parameters')
+    capital = st.number_input('Initial Capital (USDT)', value=10000)
+    eth_price = st.number_input('ETH Price (USD)', value=3000)
+    funding_rate = st.number_input('Funding Rate (% per year)', value=30) / 100
+    eth_supply_rate = st.number_input('ETH Supply Rate (% per year)', value=2) / 100
+    usdc_borrow_rate = st.number_input('USDC Borrow Rate (% per year)', value=5) / 100
+    min_liq_distance = st.number_input('Minimum Liquidation Distance (%)', value=30)
+    
+    # AAVE parameters
+    st.markdown('<h6<h6 style="margin-top:>AAVE Parameters</h6>', unsafe_allow_html=True)
+    ltv_max = st.number_input('Maximum LTV', value=0.80)
+    liquidation_threshold = st.number_input('Liquidation Threshold', value=0.825)
+
+if st.button('Calculate Optimal Strategy'):
+    result = calculate_funding_arbitrage(
+        capital=capital,
+        eth_price=eth_price,
+        ltv_max=ltv_max,
+        liquidation_threshold=liquidation_threshold,
+        funding_rate=funding_rate,
+        eth_supply_rate=eth_supply_rate,
+        usdc_borrow_rate=usdc_borrow_rate,
+        min_liq_distance=min_liq_distance
+    )
+    
+    if result:
+        st.markdown('<h4>Optimal Strategy Results</h4>', unsafe_allow_html=True)
+        
+        # Display results in sections for better readability
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.markdown('<h6 style="margin-top: 20px;">Capital Allocation</h6>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Capital Spot (USDT): {result['Capital Spot (USDT)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Capital Futures (USDT): {result['Capital Futures (USDT)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Borrow Amount (USDT): {result['Borrow Amount (USDT)']}</p>', unsafe_allow_html=True)
+
+        with col2:
+            st.markdown('<h6 style="margin-top: 20px;">ETH Position Details</h6>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">ETH Initial: {result['ETH Initial']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">ETH Borrowed: {result['ETH Borrowed']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Total ETH: {result['Total ETH']}</p>', unsafe_allow_html=True)
+
+        with col3:
+            st.markdown('<h6 style="margin-top: 20px;">Leverage and Risk Metrics</h6>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">LTV: {result['LTV']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Spot Leverage: {result['Spot Leverage']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}</p>', unsafe_allow_html=True)
+        
+        col4, col5 = st.columns(2)
+        with col4:
+            st.markdown('<h6 style="margin-top: 20px;">Futures Position Metrics</h6>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Futures Position Size (USDT): {result['Futures Position Size (USDT)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Futures Leverage: {result['Futures Leverage']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}</p>', unsafe_allow_html=True)
+        
+        with col5:
+            st.markdown('<h6 style="margin-top: 20px;">Income and ROI</h6>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">Net Income (USDT): {result['Net Income (USDT)']}</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="margin: 0;">ROI (%): {result['ROI (%)']}</p>', unsafe_allow_html=True)
+        
+        st.success('Calculation complete. Check the results above.')
+    else:
+        st.error('No valid strategy found with given parameters')', unsafe_allow_html=True)
     ltv_max = st.number_input('Maximum LTV', value=0.80)
     liquidation_threshold = st.number_input('Liquidation Threshold', value=0.825)
 
