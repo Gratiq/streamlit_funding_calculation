@@ -118,30 +118,30 @@ if st.button('Calculate Optimal Strategy'):
         
         # Display results in sections for better readability
         st.markdown('<h6>Capital Allocation</h6>', unsafe_allow_html=True)
-        st.write(f"Capital Spot (USDT): {result['Capital Spot (USDT)']}")
-        st.write(f"Capital Futures (USDT): {result['Capital Futures (USDT)']}")
-        st.write(f"Borrow Amount (USDT): {result['Borrow Amount (USDT)']}")
+        st.markdown(f'<p style="margin: 0;">Capital Spot (USDT): {result['Capital Spot (USDT)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Capital Futures (USDT): {result['Capital Futures (USDT)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Borrow Amount (USDT): {result['Borrow Amount (USDT)']}</p>', unsafe_allow_html=True)
 
         st.markdown('<h6>ETH Position Details</h6>', unsafe_allow_html=True)
-        st.write(f"ETH Initial: {result['ETH Initial']}")
-        st.write(f"ETH Borrowed: {result['ETH Borrowed']}")
-        st.write(f"Total ETH: {result['Total ETH']}")
+        st.markdown(f'<p style="margin: 0;">ETH Initial: {result['ETH Initial']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">ETH Borrowed: {result['ETH Borrowed']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Total ETH: {result['Total ETH']}</p>', unsafe_allow_html=True)
 
         st.markdown('<h6>Leverage and Risk Metrics</h6>', unsafe_allow_html=True)
-        st.write(f"LTV: {result['LTV']}")
-        st.write(f"Spot Leverage: {result['Spot Leverage']}")
-        st.write(f"Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}")
-        st.write(f"Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}")
+        st.markdown(f'<p style="margin: 0;">LTV: {result['LTV']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Spot Leverage: {result['Spot Leverage']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}</p>', unsafe_allow_html=True)
         
         st.markdown('<h6>Futures Position Metrics</h6>', unsafe_allow_html=True)
-        st.write(f"Futures Position Size (USDT): {result['Futures Position Size (USDT)']}")
-        st.write(f"Futures Leverage: {result['Futures Leverage']}")
-        st.write(f"Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}")
-        st.write(f"Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}")
+        st.markdown(f'<p style="margin: 0;">Futures Position Size (USDT): {result['Futures Position Size (USDT)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Futures Leverage: {result['Futures Leverage']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}</p>', unsafe_allow_html=True)
         
         st.markdown('<h6>Income and ROI</h6>', unsafe_allow_html=True)
-        st.write(f"Net Income (USDT): {result['Net Income (USDT)']}")
-        st.write(f"ROI (%): {result['ROI (%)']}")
+        st.markdown(f'<p style="margin: 0;">Net Income (USDT): {result['Net Income (USDT)']}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="margin: 0;">ROI (%): {result['ROI (%)']}</p>', unsafe_allow_html=True)
         
         st.success('Calculation complete. Check the results above.')
     else:
