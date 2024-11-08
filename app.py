@@ -173,9 +173,7 @@ if st.button('Calculate Optimal Strategy'):
         
         # Создаем DataFrame и отображаем его
         df = pd.DataFrame(results_data)
-        
-        # Используем st.table вместо st.dataframe для статического отображения
-        st.table(df.style.hide_index())
+        st.table(df)
         
     else:
         st.error('No valid strategy found with given parameters')
