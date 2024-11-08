@@ -97,7 +97,7 @@ with st.sidebar:
     min_liq_distance = st.number_input('Minimum Liquidation Distance (%)', value=30)
     
     # AAVE parameters
-    st.markdown('<br><h6>AAVE Parameters</h6>', unsafe_allow_html=True)
+    st.markdown('<div style="margin-top: 10px;"><h6>AAVE Parameters</h6></div>', unsafe_allow_html=True)
     ltv_max = st.number_input('Maximum LTV', value=0.80)
     liquidation_threshold = st.number_input('Liquidation Threshold', value=0.825)
 
@@ -117,29 +117,29 @@ if st.button('Calculate Optimal Strategy'):
         st.markdown('<h4>Optimal Strategy Results</h4>', unsafe_allow_html=True)
         
         # Display results in sections for better readability
-        st.markdown('<br><h6>Capital Allocation</h6>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top: 10px;"><h6>Capital Allocation</h6></div>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Capital Spot (USDT): {result['Capital Spot (USDT)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Capital Futures (USDT): {result['Capital Futures (USDT)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Borrow Amount (USDT): {result['Borrow Amount (USDT)']}</p>', unsafe_allow_html=True)
 
-        st.markdown('<br><h6>ETH Position Details</h6>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top: 10px;"><h6>ETH Position Details</h6></div>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">ETH Initial: {result['ETH Initial']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">ETH Borrowed: {result['ETH Borrowed']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Total ETH: {result['Total ETH']}</p>', unsafe_allow_html=True)
 
-        st.markdown('<br><h6>Leverage and Risk Metrics</h6>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top: 10px;"><h6>Leverage and Risk Metrics</h6></div>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">LTV: {result['LTV']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Spot Leverage: {result['Spot Leverage']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}</p>', unsafe_allow_html=True)
         
-        st.markdown('<br><h6>Futures Position Metrics</h6>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top: 10px;"><h6>Futures Position Metrics</h6></div>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Futures Position Size (USDT): {result['Futures Position Size (USDT)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Futures Leverage: {result['Futures Leverage']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}</p>', unsafe_allow_html=True)
         
-        st.markdown('<br><h6>Income and ROI</h6>', unsafe_allow_html=True)
+        st.markdown('<div style="margin-top: 10px;"><h6>Income and ROI</h6></div>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">Net Income (USDT): {result['Net Income (USDT)']}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="margin: 0;">ROI (%): {result['ROI (%)']}</p>', unsafe_allow_html=True)
         
