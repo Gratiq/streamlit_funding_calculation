@@ -115,56 +115,9 @@ if st.button('Calculate Optimal Strategy'):
     if result:
         st.header('Optimal Strategy Results')
         
-        # Создаем HTML таблицу
-        html = f'''
-        <style>
-            .results-table {{
-                width: 100%;
-                border-collapse: collapse;
-            }}
-            .results-table td {{
-                padding: 8px;
-                border: none;
-            }}
-            .section-header {{
-                text-align: center;
-                padding: 15px;
-                font-weight: bold;
-                background-color: #f5f5f5;
-            }}
-            .param-name {{
-                padding-left: 30px;
-            }}
-        </style>
-        <table class="results-table">
-            <tr><td colspan="2" class="section-header">Capital Distribution</td></tr>
-            <tr><td class="param-name">Capital Spot</td><td>{result[0]:,.2f} USDT</td></tr>
-            <tr><td class="param-name">Capital Futures</td><td>{result[1]:,.2f} USDT</td></tr>
-            <tr><td class="param-name">Borrow Amount</td><td>{result[2]:,.2f} USDT</td></tr>
+        # И все значения
+        for key, value in result.items():
+            st.write(f"{key}: {value}")
             
-            <tr><td colspan="2" class="section-header">Position Details</td></tr>
-            <tr><td class="param-name">ETH Initial</td><td>{result[3]:.4f} ETH</td></tr>
-            <tr><td class="param-name">ETH Borrowed</td><td>{result[4]:.4f} ETH</td></tr>
-            <tr><td class="param-name">Total ETH</td><td>{result[5]:.4f} ETH</td></tr>
-            
-            <tr><td colspan="2" class="section-header">Leverage</td></tr>
-            <tr><td class="param-name">Spot Leverage</td><td>{result[7]:.2f}x</td></tr>
-            <tr><td class="param-name">Futures Leverage</td><td>{result[11]:.2f}x</td></tr>
-            
-            <tr><td colspan="2" class="section-header">Liquidation Prices</td></tr>
-            <tr><td class="param-name">Spot Liquidation</td><td>${result[8]:.2f}</td></tr>
-            <tr><td class="param-name">Futures Liquidation</td><td>${result[12]:.2f}</td></tr>
-            <tr><td class="param-name">Spot Distance</td><td>{result[9]:.2f}%</td></tr>
-            <tr><td class="param-name">Futures Distance</td><td>{result[13]:.2f}%</td></tr>
-            
-            <tr><td colspan="2" class="section-header">Performance Metrics</td></tr>
-            <tr><td class="param-name">ROI (annual)</td><td>{result[15] * 100:.2f}%</td></tr>
-            <tr><td class="param-name">Net Income</td><td>{result[14]:,.2f} USDT</td></tr>
-            <tr><td class="param-name">LTV</td><td>{result[6] * 100:.2f}%</td></tr>
-        </table>
-        '''
-        
-        st.markdown(html, unsafe_allow_html=True)
-        
     else:
         st.error('No valid strategy found with given parameters')
