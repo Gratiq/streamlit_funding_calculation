@@ -13,7 +13,7 @@ def calculate_funding_arbitrage(
 ):
     results = []
     
-    # Iterate over capital allocation to spot from 60% to 100%
+    # Iterate over capital allocation to spot from 60% to 90%
     for c_spot in range(int(0.6 * capital), int(0.9 * capital), 250):
         c_futures = capital - c_spot
         eth_initial = c_spot / eth_price
@@ -62,28 +62,29 @@ def calculate_funding_arbitrage(
             roi = net_income / capital
 
             results.append({
-                "Capital_Spot": c_spot,
-                "Capital_Futures": c_futures,
-                "Borrow_Amount": borrow_amount,
-                "ETH_Initial": eth_initial,
-                "ETH_Borrowed": eth_borrowed,
-                "Total_ETH": total_eth,
-                "LTV": ltv,
-                "Leverage_Spot": spot_leverage,
-                "Liq_Price_Spot": liq_price_spot,
-                "Liq_Distance_Spot_%": liq_distance_spot,
-                "Futures_Position_Size": futures_position_size,
-                "Leverage_Futures": leverage_futures,
-                "Liq_Price_Futures": liq_price_futures,
-                "Liq_Distance_Futures_%": liq_distance_futures,
-                "Net_Income": net_income,
-                "ROI": roi,
+                "Capital Spot (USDT)": round(c_spot, 2),
+                "Capital Futures (USDT)": round(c_futures, 2),
+                "Borrow Amount (USDT)": round(borrow_amount, 2),
+                "ETH Initial": round(eth_initial, 4),
+                "ETH Borrowed": round(eth_borrowed, 4),
+                "Total ETH": round(total_eth, 4),
+                "LTV": round(ltv, 2),
+                "Spot Leverage": round(spot_leverage, 2),
+                "Liq. Price Spot (USD)": round(liq_price_spot, 2),
+                "Liq. Distance Spot (%)": round(liq_distance_spot, 2),
+                "Futures Position Size (USDT)": round(futures_position_size, 2),
+                "Futures Leverage": round(leverage_futures, 2),
+                "Liq. Price Futures (USD)": round(liq_price_futures, 2),
+                "Liq. Distance Futures (%)": round(liq_distance_futures, 2),
+                "Net Income (USDT)": round(net_income, 2),
+                "ROI (%)": round(roi * 100, 2),
             })
 
-    return max(results, key=lambda x: x["ROI"]) if results else None
+    return max(results, key=lambda x: x["ROI (%)"]) if results else None
 
 # Streamlit UI
 st.title('Funding Arbitrage Calculator')
+st.markdown('### Optimize your funding strategies and visualize results with enhanced clarity.')
 
 # Input parameters
 with st.sidebar:
@@ -114,10 +115,7 @@ if st.button('Calculate Optimal Strategy'):
     
     if result:
         st.header('Optimal Strategy Results')
-        
-        # И все значения
-        for key, value in result.items():
-            st.write(f"{key}: {value}")
-            
+        st.dataframe(pd.DataFrame([result]))
+        st.success('Calculation complete. Check the results above.')
     else:
         st.error('No valid strategy found with given parameters')
