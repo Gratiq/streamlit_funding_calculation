@@ -84,7 +84,7 @@ def calculate_funding_arbitrage(
 
 # Streamlit UI
 st.title('Funding Arbitrage Calculator')
-st.markdown('### Optimize your funding strategies and visualize results with enhanced clarity.')
+st.markdown('<h4>Optimize your funding strategies and visualize results with enhanced clarity.</h4>', unsafe_allow_html=True)
 
 # Input parameters
 with st.sidebar:
@@ -97,7 +97,7 @@ with st.sidebar:
     min_liq_distance = st.number_input('Minimum Liquidation Distance (%)', value=30)
     
     # AAVE parameters
-    st.subheader('AAVE Parameters')
+    st.markdown('<h6>AAVE Parameters</h6>', unsafe_allow_html=True)
     ltv_max = st.number_input('Maximum LTV', value=0.80)
     liquidation_threshold = st.number_input('Liquidation Threshold', value=0.825)
 
@@ -114,32 +114,32 @@ if st.button('Calculate Optimal Strategy'):
     )
     
     if result:
-        st.header('Optimal Strategy Results')
+        st.markdown('<h4>Optimal Strategy Results</h4>', unsafe_allow_html=True)
         
         # Display results in sections for better readability
-        st.subheader('Capital Allocation')
+        st.markdown('<h6>Capital Allocation</h6>', unsafe_allow_html=True)
         st.write(f"Capital Spot (USDT): {result['Capital Spot (USDT)']}")
         st.write(f"Capital Futures (USDT): {result['Capital Futures (USDT)']}")
         st.write(f"Borrow Amount (USDT): {result['Borrow Amount (USDT)']}")
 
-        st.subheader('ETH Position Details')
+        st.markdown('<h6>ETH Position Details</h6>', unsafe_allow_html=True)
         st.write(f"ETH Initial: {result['ETH Initial']}")
         st.write(f"ETH Borrowed: {result['ETH Borrowed']}")
         st.write(f"Total ETH: {result['Total ETH']}")
 
-        st.subheader('Leverage and Risk Metrics')
+        st.markdown('<h6>Leverage and Risk Metrics</h6>', unsafe_allow_html=True)
         st.write(f"LTV: {result['LTV']}")
         st.write(f"Spot Leverage: {result['Spot Leverage']}")
         st.write(f"Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}")
         st.write(f"Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}")
         
-        st.subheader('Futures Position Metrics')
+        st.markdown('<h6>Futures Position Metrics</h6>', unsafe_allow_html=True)
         st.write(f"Futures Position Size (USDT): {result['Futures Position Size (USDT)']}")
         st.write(f"Futures Leverage: {result['Futures Leverage']}")
         st.write(f"Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}")
         st.write(f"Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}")
         
-        st.subheader('Income and ROI')
+        st.markdown('<h6>Income and ROI</h6>', unsafe_allow_html=True)
         st.write(f"Net Income (USDT): {result['Net Income (USDT)']}")
         st.write(f"ROI (%): {result['ROI (%)']}")
         
