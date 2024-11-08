@@ -116,69 +116,53 @@ if st.button('Calculate Optimal Strategy'):
         st.header('Optimal Strategy Results')
         
         # Создаем HTML таблицу
-        html = '''
+        html = f'''
         <style>
-            .results-table {
+            .results-table {{
                 width: 100%;
                 border-collapse: collapse;
-            }
-            .results-table td {
+            }}
+            .results-table td {{
                 padding: 8px;
                 border: none;
-            }
-            .section-header {
+            }}
+            .section-header {{
                 text-align: center;
                 padding: 15px;
                 font-weight: bold;
                 background-color: #f5f5f5;
-            }
-            .param-name {
+            }}
+            .param-name {{
                 padding-left: 30px;
-            }
+            }}
         </style>
         <table class="results-table">
             <tr><td colspan="2" class="section-header">Capital Distribution</td></tr>
-            <tr><td class="param-name">Capital Spot</td><td>{:,.2f} USDT</td></tr>
-            <tr><td class="param-name">Capital Futures</td><td>{:,.2f} USDT</td></tr>
-            <tr><td class="param-name">Borrow Amount</td><td>{:,.2f} USDT</td></tr>
+            <tr><td class="param-name">Capital Spot</td><td>{result[0]:,.2f} USDT</td></tr>
+            <tr><td class="param-name">Capital Futures</td><td>{result[1]:,.2f} USDT</td></tr>
+            <tr><td class="param-name">Borrow Amount</td><td>{result[2]:,.2f} USDT</td></tr>
             
             <tr><td colspan="2" class="section-header">Position Details</td></tr>
-            <tr><td class="param-name">ETH Initial</td><td>{:.4f} ETH</td></tr>
-            <tr><td class="param-name">ETH Borrowed</td><td>{:.4f} ETH</td></tr>
-            <tr><td class="param-name">Total ETH</td><td>{:.4f} ETH</td></tr>
+            <tr><td class="param-name">ETH Initial</td><td>{result[3]:.4f} ETH</td></tr>
+            <tr><td class="param-name">ETH Borrowed</td><td>{result[4]:.4f} ETH</td></tr>
+            <tr><td class="param-name">Total ETH</td><td>{result[5]:.4f} ETH</td></tr>
             
             <tr><td colspan="2" class="section-header">Leverage</td></tr>
-            <tr><td class="param-name">Spot Leverage</td><td>{:.2f}x</td></tr>
-            <tr><td class="param-name">Futures Leverage</td><td>{:.2f}x</td></tr>
+            <tr><td class="param-name">Spot Leverage</td><td>{result[7]:.2f}x</td></tr>
+            <tr><td class="param-name">Futures Leverage</td><td>{result[11]:.2f}x</td></tr>
             
             <tr><td colspan="2" class="section-header">Liquidation Prices</td></tr>
-            <tr><td class="param-name">Spot Liquidation</td><td>${:.2f}</td></tr>
-            <tr><td class="param-name">Futures Liquidation</td><td>${:.2f}</td></tr>
-            <tr><td class="param-name">Spot Distance</td><td>{:.2f}%</td></tr>
-            <tr><td class="param-name">Futures Distance</td><td>{:.2f}%</td></tr>
+            <tr><td class="param-name">Spot Liquidation</td><td>${result[8]:.2f}</td></tr>
+            <tr><td class="param-name">Futures Liquidation</td><td>${result[12]:.2f}</td></tr>
+            <tr><td class="param-name">Spot Distance</td><td>{result[9]:.2f}%</td></tr>
+            <tr><td class="param-name">Futures Distance</td><td>{result[13]:.2f}%</td></tr>
             
             <tr><td colspan="2" class="section-header">Performance Metrics</td></tr>
-            <tr><td class="param-name">ROI (annual)</td><td>{:.2f}%</td></tr>
-            <tr><td class="param-name">Net Income</td><td>{:,.2f} USDT</td></tr>
-            <tr><td class="param-name">LTV</td><td>{:.2f}%</td></tr>
+            <tr><td class="param-name">ROI (annual)</td><td>{result[15] * 100:.2f}%</td></tr>
+            <tr><td class="param-name">Net Income</td><td>{result[14]:,.2f} USDT</td></tr>
+            <tr><td class="param-name">LTV</td><td>{result[6] * 100:.2f}%</td></tr>
         </table>
-        '''.format(
-            result['Capital_Spot'],
-            result['Capital_Futures'],
-            result['Borrow_Amount'],
-            result['ETH_Initial'],
-            result['ETH_Borrowed'],
-            result['Total_ETH'],
-            result['Leverage_Spot'],
-            result['Leverage_Futures'],
-            result['Liq_Price_Spot'],
-            result['Liq_Price_Futures'],
-            result['Liq_Distance_Spot_%'],
-            result['Liq_Distance_Futures_%'],
-            result['ROI'] * 100,
-            result['Net_Income'],
-            result['LTV'] * 100
-        )
+        '''
         
         st.markdown(html, unsafe_allow_html=True)
         
