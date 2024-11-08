@@ -115,7 +115,34 @@ if st.button('Calculate Optimal Strategy'):
     
     if result:
         st.header('Optimal Strategy Results')
-        st.dataframe(pd.DataFrame([result]))
+        
+        # Display results in sections for better readability
+        st.subheader('Capital Allocation')
+        st.write(f"Capital Spot (USDT): {result['Capital Spot (USDT)']}")
+        st.write(f"Capital Futures (USDT): {result['Capital Futures (USDT)']}")
+        st.write(f"Borrow Amount (USDT): {result['Borrow Amount (USDT)']}")
+
+        st.subheader('ETH Position Details')
+        st.write(f"ETH Initial: {result['ETH Initial']}")
+        st.write(f"ETH Borrowed: {result['ETH Borrowed']}")
+        st.write(f"Total ETH: {result['Total ETH']}")
+
+        st.subheader('Leverage and Risk Metrics')
+        st.write(f"LTV: {result['LTV']}")
+        st.write(f"Spot Leverage: {result['Spot Leverage']}")
+        st.write(f"Liq. Price Spot (USD): {result['Liq. Price Spot (USD)']}")
+        st.write(f"Liq. Distance Spot (%): {result['Liq. Distance Spot (%)']}")
+        
+        st.subheader('Futures Position Metrics')
+        st.write(f"Futures Position Size (USDT): {result['Futures Position Size (USDT)']}")
+        st.write(f"Futures Leverage: {result['Futures Leverage']}")
+        st.write(f"Liq. Price Futures (USD): {result['Liq. Price Futures (USD)']}")
+        st.write(f"Liq. Distance Futures (%): {result['Liq. Distance Futures (%)']}")
+        
+        st.subheader('Income and ROI')
+        st.write(f"Net Income (USDT): {result['Net Income (USDT)']}")
+        st.write(f"ROI (%): {result['ROI (%)']}")
+        
         st.success('Calculation complete. Check the results above.')
     else:
         st.error('No valid strategy found with given parameters')
