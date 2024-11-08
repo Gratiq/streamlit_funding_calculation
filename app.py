@@ -115,65 +115,72 @@ if st.button('Calculate Optimal Strategy'):
     if result:
         st.header('Optimal Strategy Results')
         
-        # Создаем таблицу результатов
-        results_data = {
-            'Parameter': [
-                'Capital Distribution',
-                '    Capital Spot',
-                '    Capital Futures',
-                '    Borrow Amount',
-                '',
-                'Position Details',
-                '    ETH Initial',
-                '    ETH Borrowed',
-                '    Total ETH',
-                '',
-                'Leverage',
-                '    Spot Leverage',
-                '    Futures Leverage',
-                '',
-                'Liquidation Prices',
-                '    Spot Liquidation',
-                '    Futures Liquidation',
-                '    Spot Distance',
-                '    Futures Distance',
-                '',
-                'Performance Metrics',
-                '    ROI (annual)',
-                '    Net Income',
-                '    LTV'
-            ],
-            'Value': [
-                '',
-                f"{result['Capital_Spot']:.2f} USDT",
-                f"{result['Capital_Futures']:.2f} USDT",
-                f"{result['Borrow_Amount']:.2f} USDT",
-                '',
-                '',
-                f"{result['ETH_Initial']:.4f} ETH",
-                f"{result['ETH_Borrowed']:.4f} ETH",
-                f"{result['Total_ETH']:.4f} ETH",
-                '',
-                '',
-                f"{result['Leverage_Spot']:.2f}x",
-                f"{result['Leverage_Futures']:.2f}x",
-                '',
-                '',
-                f"${result['Liq_Price_Spot']:.2f}",
-                f"${result['Liq_Price_Futures']:.2f}",
-                f"{result['Liq_Distance_Spot_%']:.2f}%",
-                f"{result['Liq_Distance_Futures_%']:.2f}%",
-                '',
-                '',
-                f"{result['ROI']*100:.2f}%",
-                f"{result['Net_Income']:.2f} USDT",
-                f"{result['LTV']*100:.2f}%"
-            ]
-        }
+        # Создаем HTML таблицу
+        html = '''
+        <style>
+            .results-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .results-table td {
+                padding: 8px;
+                border: none;
+            }
+            .section-header {
+                text-align: center;
+                padding: 15px;
+                font-weight: bold;
+                background-color: #f5f5f5;
+            }
+            .param-name {
+                padding-left: 30px;
+            }
+        </style>
+        <table class="results-table">
+            <tr><td colspan="2" class="section-header">Capital Distribution</td></tr>
+            <tr><td class="param-name">Capital Spot</td><td>{:,.2f} USDT</td></tr>
+            <tr><td class="param-name">Capital Futures</td><td>{:,.2f} USDT</td></tr>
+            <tr><td class="param-name">Borrow Amount</td><td>{:,.2f} USDT</td></tr>
+            
+            <tr><td colspan="2" class="section-header">Position Details</td></tr>
+            <tr><td class="param-name">ETH Initial</td><td>{:.4f} ETH</td></tr>
+            <tr><td class="param-name">ETH Borrowed</td><td>{:.4f} ETH</td></tr>
+            <tr><td class="param-name">Total ETH</td><td>{:.4f} ETH</td></tr>
+            
+            <tr><td colspan="2" class="section-header">Leverage</td></tr>
+            <tr><td class="param-name">Spot Leverage</td><td>{:.2f}x</td></tr>
+            <tr><td class="param-name">Futures Leverage</td><td>{:.2f}x</td></tr>
+            
+            <tr><td colspan="2" class="section-header">Liquidation Prices</td></tr>
+            <tr><td class="param-name">Spot Liquidation</td><td>${:.2f}</td></tr>
+            <tr><td class="param-name">Futures Liquidation</td><td>${:.2f}</td></tr>
+            <tr><td class="param-name">Spot Distance</td><td>{:.2f}%</td></tr>
+            <tr><td class="param-name">Futures Distance</td><td>{:.2f}%</td></tr>
+            
+            <tr><td colspan="2" class="section-header">Performance Metrics</td></tr>
+            <tr><td class="param-name">ROI (annual)</td><td>{:.2f}%</td></tr>
+            <tr><td class="param-name">Net Income</td><td>{:,.2f} USDT</td></tr>
+            <tr><td class="param-name">LTV</td><td>{:.2f}%</td></tr>
+        </table>
+        '''.format(
+            result['Capital_Spot'],
+            result['Capital_Futures'],
+            result['Borrow_Amount'],
+            result['ETH_Initial'],
+            result['ETH_Borrowed'],
+            result['Total_ETH'],
+            result['Leverage_Spot'],
+            result['Leverage_Futures'],
+            result['Liq_Price_Spot'],
+            result['Liq_Price_Futures'],
+            result['Liq_Distance_Spot_%'],
+            result['Liq_Distance_Futures_%'],
+            result['ROI']*100,
+            result['Net_Income'],
+            result['LTV']*100
+        )
         
-        # Создаем DataFrame и отображаем его
-        df = pd.DataFrame(results_data)
-        st.table(df)
+        st.markdown(html, unsafe_allow_html=True)
         
     else:
         st.error('No valid strategy found with given parameters')
